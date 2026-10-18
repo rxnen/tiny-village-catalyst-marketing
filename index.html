@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiny Village Catalyst</title>
+<meta name="description" content="A free, open-source guide that provides siting, permitting, cost, and funding solutions for community-led affordable housing projects. A project of Tiny Village Spirit.">
+<meta property="og:title" content="Tiny Village Catalyst">
+<meta property="og:description" content="From vision to village — siting, permitting, budgeting, and organizing help for communities building tiny home villages.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg">
+
+<link rel="stylesheet" href="brand.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+:root{--teal:#7A9A57;--teal-dark:#5F7D43;--teal-accent:#93B26F;--hairline:rgba(122,154,87,.22)}
+body{background:#F4F1EA;--teal:#7A9A57;--teal-dark:#5F7D43;--teal-accent:#93B26F;--hairline:rgba(122,154,87,.22)}
+.section-headline,h1,h2,h3,h4{font-family:'Outfit',sans-serif!important}
+a{color:var(--teal)}
+a:hover{color:var(--teal-dark)}
+
+/* buttons: olive, rectangular, no shadow, no shine (per brand brief) */
+.btn-primary{background:#7A9A57!important;border-color:#7A9A57!important;box-shadow:none!important}
+.btn-primary::after{display:none!important;content:none!important;animation:none!important}
+.btn-primary:hover{background:#5F7D43!important;border-color:#5F7D43!important}
+.btn-ghost{color:#5F7D43!important}
+
+/* maplibre chrome */
+.maplibregl-ctrl-group{border:1px solid var(--hairline)!important;box-shadow:none!important;border-radius:8px!important;overflow:hidden}
+.maplibregl-ctrl-group button{width:36px!important;height:36px!important}
+.maplibregl-ctrl-attrib{font-family:'Source Sans 3',sans-serif;font-size:11px}
+
+/* hover states (ported from the design canvas style-hover attributes) */
+.nav-contribute:hover{background:var(--teal)!important;color:#fff!important}
+.hero-demo-btn:hover{background:#F4F1EA!important;color:#4C6635!important}
+
+/* "The How" scroll-pinned stepper (ported from the DCLogic component) */
+.how-img{grid-area:1/1;position:relative;width:100%;height:100%;min-height:0;opacity:0;transition:opacity .35s ease}
+.how-img.is-on{opacity:1}
+.how-img img{width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;position:relative;z-index:1}
+.how-detail{grid-area:1/1;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.how-detail.is-on{opacity:1;pointer-events:auto}
+.how-step{cursor:pointer;min-height:42vh;padding:28px 0 0 clamp(24px,3vw,48px);border-bottom:2px dashed var(--hairline);color:var(--muted);transition:color .3s ease}
+.how-step.is-on{color:var(--ink)}
+
+/* branded placeholder shown until a real photo is dropped into assets/ */
+.img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:18px;
+  background-color:#E8EDDD;
+  background-image:linear-gradient(rgba(122,154,87,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(122,154,87,.16) 1px,transparent 1px);
+  background-size:28px 28px;border-radius:14px}
+.img-ph .dot{width:34px;height:34px;border-radius:50%;border:2px dashed var(--teal);display:flex;align-items:center;justify-content:center;color:var(--teal-dark);font-size:17px}
+.img-ph span{font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.06em;color:var(--teal-dark);max-width:84%;line-height:1.55}
+
+@media (max-width:760px){
+  header nav{gap:16px!important}
+  #how > div{position:static!important;height:auto!important;padding:64px 6vw!important}
+  #how .how-grid{grid-template-columns:minmax(0,1fr)!important}
+  #how .how-list-wrap{border-left:none!important;border-top:1px solid var(--hairline);margin-top:28px}
+  #how .how-list{transform:none!important;padding-bottom:0!important}
+  .how-img,.how-detail{opacity:1!important;pointer-events:auto!important}
+  .how-step{min-height:0!important;color:var(--ink)!important;padding:24px 0 24px!important}
+  .how-img-stack{margin-bottom:24px}
+}
+</style>
+</head>
+<body>
+
+<header style="font-family:'Outfit',sans-serif;padding:0 6vw;position:sticky;top:0;z-index:20;background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <a href="#top" style="text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:12px">
+      <span style="width:44px;height:44px;border-radius:50%;background:var(--teal);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+        <svg width="30" height="30" viewBox="160 160 396 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tiny Village Catalyst logo"><path d="M508.749 317.399C516.777 287.314 508.991 253.884 485.389 230.282C461.788 206.681 428.36 198.895 398.273 206.923C376.231 184.928 343.39 174.956 311.148 183.596C278.906 192.234 255.45 217.292 247.36 247.361C217.291 255.451 192.233 278.91 183.595 311.149C174.957 343.391 184.927 376.232 206.924 398.274C198.896 428.359 206.683 461.789 230.284 485.391C253.885 508.992 287.313 516.779 317.401 508.75C339.442 530.745 372.286 540.717 404.525 532.079C436.767 523.441 460.223 498.384 468.313 468.315C498.383 460.224 523.44 436.766 532.078 404.526C540.716 372.285 530.747 339.443 508.749 317.402V317.399ZM470.899 244.776C486.892 260.77 493.488 282.601 490.687 303.412L415.577 260.046C412.411 258.218 408.509 258.218 405.345 260.046L317.401 310.82V277.526C317.401 275.191 318.652 273.005 320.676 271.837L387.644 233.174C414.178 218.353 448.346 222.223 470.901 244.776H470.899ZM357.837 311.144L398.275 334.491V381.185L357.837 404.532L317.398 381.185V334.491L357.837 311.144ZM264.776 269.693C265.207 239.305 285.644 211.649 316.453 203.393C338.3 197.54 360.505 202.744 377.127 215.573L302.014 258.937C298.848 260.764 296.898 264.144 296.898 267.798V369.346L268.065 352.699C266.043 351.531 264.776 349.353 264.776 347.017V269.691V269.693ZM203.391 316.454C209.244 294.608 224.854 277.978 244.276 269.999V356.73C244.276 360.384 246.226 363.763 249.392 365.591L337.337 416.365L308.503 433.013C306.481 434.181 303.961 434.188 301.939 433.02L234.971 394.357C208.868 378.789 195.138 347.261 203.391 316.454ZM244.775 470.9C228.781 454.906 222.186 433.075 224.986 412.264L300.096 455.63C303.263 457.457 307.164 457.457 310.328 455.63L398.273 404.856V438.149C398.273 440.485 397.022 442.671 394.997 443.839L328.029 482.502C301.495 497.322 267.327 493.452 244.772 470.9H244.775ZM450.897 445.982C450.466 476.371 430.029 504.027 399.22 512.283C377.373 518.136 355.168 512.932 338.547 500.102L413.659 456.738C416.826 454.911 418.775 451.532 418.775 447.877V346.329L447.609 362.977C449.631 364.145 450.897 366.323 450.897 368.659V445.985V445.982ZM512.282 399.221C506.429 421.068 490.819 437.697 471.397 445.676V358.946C471.397 355.292 469.448 351.912 466.281 350.085L378.336 299.311L407.17 282.663C409.192 281.495 411.712 281.487 413.734 282.655L480.702 321.318C506.805 336.887 520.536 368.415 512.282 399.221Z" fill="#fff"/></svg>
+      </span>
+      <span style="font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1">Tiny Village Catalyst</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;font-size:15px;font-weight:600">
+      <a href="#about" style="text-decoration:none;color:var(--ink);font-weight:400;font-size:18px;font-family:'Source Sans 3',sans-serif">About</a>
+      <a href="#audience" style="text-decoration:none;color:var(--ink);font-weight:400;font-size:18px;font-family:'Source Sans 3',sans-serif">For Organizers</a>
+      <a href="#goals" style="text-decoration:none;color:var(--ink);font-weight:400;font-size:18px;font-family:'Source Sans 3',sans-serif">For Funders</a>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="nav-contribute" href="#involved" style="text-decoration:none;color:var(--teal);border:1.5px solid var(--teal);border-radius:6px;padding:9px 18px;font-size:14px;font-weight:600;font-family:'Source Sans 3',sans-serif;transition:background .2s,color .2s">Contribute</a>
+        <a class="btn btn-primary" href="https://tinyvillagespirit.com/contact" target="_blank" rel="noopener" style="border-radius:6px;padding:10px 20px;font-size:14px;box-shadow:none;font-family:'Source Sans 3',sans-serif">Join the Pilot</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section id="top" style="color:var(--ink);position:relative;overflow:hidden;min-height:78vh;display:flex;align-items:center;justify-content:center;padding:120px 6vw">
+  <div id="hero-map" style="position:absolute;inset:0;background:#eef0ec;pointer-events:none"></div>
+  <div style="position:absolute;inset:0;background:rgba(80,106,52,.72);pointer-events:none"></div>
+  <div style="max-width:900px;margin:0 auto;position:relative;text-align:center">
+    <h1 style="font-family:'Outfit',sans-serif;font-weight:700;color:#fff;font-size:clamp(40px,5.2vw,72px);line-height:1.05;letter-spacing:-0.025em;margin:0 auto;text-wrap:balance">From Vision to Village</h1>
+    <p style="font-size:clamp(20px,1.9vw,26px);line-height:1.5;max-width:760px;margin:22px auto 0;color:#fff;text-wrap:pretty">Tiny Village Catalyst is a free, open-source guide that provides siting, permitting, cost, and funding solutions for affordable housing projects.</p>
+    <div style="display:flex;justify-content:center;margin-top:36px">
+      <a class="hero-demo-btn" href="https://tvs-village-catalyst-demo.web.app/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#5F7D43;text-decoration:none;font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:17px;padding:15px 28px;border-radius:6px;transition:background .2s,color .2s">Try the demo →</a>
+    </div>
+  </div>
+</section>
+
+<section id="goals" style="padding:110px 6vw 56px">
+  <div style="max-width:1140px;margin:0 auto">
+    <div class="section-head" style="margin:0;padding:0;max-width:none;width:100%">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,5vw,72px);align-items:stretch">
+      <div>
+      <h2 class="section-headline">The Problem</h2>
+      <div style="display:flex;flex-direction:column;gap:32px;margin-top:40px">
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:24px;align-items:start">
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(56px,5.5vw,80px);line-height:.85;color:var(--teal)">1</span>
+          <p style="margin:0;font-size:clamp(18px,1.5vw,21px);line-height:1.45;color:var(--ink);max-width:520px;text-wrap:pretty;padding-top:4px">Community groups have the will to build emergency housing for their homeless population.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:24px;align-items:start">
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(56px,5.5vw,80px);line-height:.85;color:var(--teal)">2</span>
+          <p style="margin:0;font-size:clamp(18px,1.5vw,21px);line-height:1.45;color:var(--ink);max-width:520px;text-wrap:pretty;padding-top:4px">Cities have funding and resources allocated specifically for supporting affordable housing projects.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:24px;align-items:start">
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(56px,5.5vw,80px);line-height:.85;color:var(--teal)">3</span>
+          <p style="margin:0;font-size:clamp(18px,1.5vw,21px);line-height:1.45;color:var(--ink);max-width:520px;text-wrap:pretty;padding-top:4px">Only a handful of people have knowledge and experience from past projects.</p>
+        </div>
+      </div>
+      </div>
+      <img src="assets/village-photo.jpg" alt="Colorful painted tiny homes with wooden porches at a tiny village" style="width:100%;height:100%;min-height:420px;object-fit:cover;border-radius:14px;display:block">
+      </div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(24px,2.6vw,34px);line-height:1.25;letter-spacing:-0.015em;color:var(--ink);margin:64px auto 0;max-width:900px;text-align:center;text-wrap:balance">Tiny Village Catalyst is a village-building expert, available to every community at any time.</p>
+    </div>
+  </div>
+</section>
+
+<section id="what" style="padding:96px 6vw 104px;background-color:#E8EDDD;background-image:linear-gradient(rgba(122,154,87,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(122,154,87,.11) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px">
+  <div style="max-width:1140px;margin:0 auto">
+    <h2 class="section-headline" style="margin:0 0 56px">What it does</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:40px 0">
+      <div style="padding-right:36px">
+        <div style="display:flex;align-items:center;margin-bottom:28px">
+          <span style="width:18px;height:18px;border-radius:50%;border:3px solid var(--teal);background:#E8EDDD;flex-shrink:0;box-sizing:border-box"></span>
+          <span style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:var(--teal-dark);padding:0 12px;background:#E8EDDD">STEP_01</span>
+          <span style="flex:1;border-top:2px solid var(--teal);opacity:1"></span>
+        </div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,32px);letter-spacing:-0.015em;line-height:1.1;margin:0 0 12px;color:var(--ink)">Ask</h3>
+        <p style="margin:0;font-size:18px;line-height:1.5;color:var(--ink);text-wrap:pretty">Type a real question in plain language.</p>
+        <div style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:15px;line-height:1.55;color:var(--ink);margin-top:22px;padding:10px 0 12px;border-bottom:2px solid var(--ink);display:flex;gap:10px"><span style="color:var(--teal)">&gt;</span><span>Can we build on church-owned land in our city?<span style="display:inline-block;width:9px;height:17px;background:var(--teal);vertical-align:-3px;margin-left:4px"></span></span></div>
+      </div>
+      <div style="padding-right:36px">
+        <div style="display:flex;align-items:center;margin-bottom:28px">
+          <span style="width:18px;height:18px;border-radius:50%;border:3px solid var(--teal);background:#E8EDDD;flex-shrink:0;box-sizing:border-box"></span>
+          <span style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:var(--teal-dark);padding:0 12px;background:#E8EDDD">STEP_02</span>
+          <span style="flex:1;border-top:2px solid var(--teal);opacity:1"></span>
+        </div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,32px);letter-spacing:-0.015em;line-height:1.1;margin:0 0 12px;color:var(--ink)">Get a grounded answer</h3>
+        <p style="margin:0;font-size:18px;line-height:1.5;color:var(--ink);text-wrap:pretty">Every answer comes from a curated library of real village experience, local codes, cost data, and funder profiles, and cites its source.</p>
+        <div style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:13px;line-height:1.9;color:var(--muted);margin-top:22px;display:flex;flex-direction:column">
+          <span><span style="color:var(--teal-dark)">[1]</span> village build records</span>
+          <span><span style="color:var(--teal-dark)">[2]</span> local codes</span>
+          <span><span style="color:var(--teal-dark)">[3]</span> cost data</span>
+          <span><span style="color:var(--teal-dark)">[4]</span> funder profiles</span>
+        </div>
+      </div>
+      <div style="padding-right:0">
+        <div style="display:flex;align-items:center;margin-bottom:28px">
+          <span style="width:18px;height:18px;border-radius:50%;border:3px solid var(--teal);background:#E8EDDD;flex-shrink:0;box-sizing:border-box"></span>
+          <span style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:var(--teal-dark);padding:0 12px;background:#E8EDDD">STEP_03</span>
+          <span style="flex:1;border-top:2px dashed var(--teal);opacity:.5"></span>
+        </div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,32px);letter-spacing:-0.015em;line-height:1.1;margin:0 0 12px;color:var(--ink)">Decide, with backup</h3>
+        <p style="margin:0;font-size:18px;line-height:1.5;color:var(--ink);text-wrap:pretty">For zoning, legal, and money questions, the tool flags what needs expert review and connects you with people who’ve done it.</p>
+        <div style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:13px;line-height:1.9;color:var(--ink);margin-top:22px;display:flex;flex-direction:column">
+          <span><span style="color:#b8860b">⚑</span> needs_review: zoning, legal, money</span>
+          <span><span style="color:var(--teal-dark)">→</span> route_to: someone who’s done it</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:#fff;position:relative">
+  <div id="howPin" style="position:sticky;top:88px;height:calc(100vh - 88px);overflow:hidden;padding:36px 6vw 28px;box-sizing:border-box">
+  <div class="how-grid" style="max-width:1140px;margin:0 auto;height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;align-items:stretch">
+    <div style="padding-right:clamp(24px,3vw,48px);display:flex;flex-direction:column;min-height:0;height:100%">
+      <h2 class="section-headline" style="margin:0 0 20px;flex:none">Follow our blueprint</h2>
+      <div class="how-img-stack" style="display:grid;grid-template-rows:minmax(0,1fr);flex:0 1 auto;min-height:100px;width:100%;aspect-ratio:16/10">
+          <div class="how-img is-on" data-idx="0">
+            <img src="assets/how-1.jpg" alt="Volunteer shoveling wood chips at a village build" onerror="this.style.display='none'">
+            <div class="img-ph"><span class="dot">⊹</span><span>Volunteer shoveling wood chips at a village build</span></div>
+          </div>
+          <div class="how-img" data-idx="1">
+            <img src="assets/how-2.png" alt="Aerial view with candidate parcels outlined" onerror="this.style.display='none'">
+            <div class="img-ph"><span class="dot">⊹</span><span>Aerial view with candidate parcels outlined</span></div>
+          </div>
+          <div class="how-img" data-idx="2">
+            <img src="assets/how-3.jpg" alt="Paint cans lined up on a painted workbench" onerror="this.style.display='none'">
+            <div class="img-ph"><span class="dot">⊹</span><span>Paint cans lined up on a painted workbench</span></div>
+          </div>
+          <div class="how-img" data-idx="3">
+            <img src="assets/how-4.jpg" alt="Resident painting a mural on a tiny home" onerror="this.style.display='none'">
+            <div class="img-ph"><span class="dot">⊹</span><span>Resident painting a mural on a tiny home</span></div>
+          </div>
+          <div class="how-img" data-idx="4">
+            <img src="assets/how-5.jpg" alt="Two volunteers carrying a painted planter through a village" onerror="this.style.display='none'">
+            <div class="img-ph"><span class="dot">⊹</span><span>Two volunteers carrying a painted planter through a village</span></div>
+          </div>
+      </div>
+      <div style="display:grid;margin-top:20px;flex:none">
+          <div class="how-detail is-on" data-idx="0">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>A readiness check across coalition, sponsor, city champion, and resident voice</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>A clear read on what stage you’re in and what’s still unresolved</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>A sequenced roadmap so every next tool is reached for a reason</span></div>
+            </div>
+          </div>
+          <div class="how-detail" data-idx="1">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Screens public parcel, zoning, environmental, and physical data</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Plain-language explanations on every filter you apply</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Every result traces back to the public record it came from</span></div>
+            </div>
+            <a class="inline-link" href="https://tvs-village-catalyst-demo.web.app/" target="_blank" rel="noopener" style="margin-top:16px;display:inline-block">Try the land screening prototype →</a>
+          </div>
+          <div class="how-detail" data-idx="2">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Costed bills of materials from the Oakland and Richmond builds</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Cost benchmarks for site work, units, and shared facilities</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Funding sources matched to your jurisdiction and project type</span></div>
+            </div>
+          </div>
+          <div class="how-detail" data-idx="3">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>How many units a site supports and which layouts have worked</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Required shared facilities: hygiene, kitchen, community, and office</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Configurations drawn from villages that are built and occupied</span></div>
+            </div>
+          </div>
+          <div class="how-detail" data-idx="4">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>The approval sequence for your jurisdiction, step by step</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>What a shelter crisis declaration changes for your project</span></div>
+              <div style="display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.45;color:var(--ink)"><span style="color:var(--teal);font-weight:700">—</span><span>Permitting precedent from villages that got approved and built</span></div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="how-list-wrap" id="howWin" style="border-left:1px solid var(--hairline);overflow:hidden;height:100%;position:relative">
+    <div class="how-list" id="howList" style="padding-bottom:45vh;will-change:transform">
+      <div class="how-step is-on" data-step="0">
+        <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px)">01</span>
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,36px);letter-spacing:-0.015em;line-height:1.1">Community readiness</span>
+          <span style="font-size:clamp(16px,1.3vw,19px);font-weight:400;color:var(--muted)">(Coming soon)</span>
+        </div>
+        <p style="margin:14px 0 0;font-size:clamp(17px,1.4vw,20px);line-height:1.45;max-width:520px;text-wrap:pretty">Identify the stage a coalition is in, what's unresolved, and what plans need to be made next.</p>
+      </div>
+      <div class="how-step" data-step="1">
+        <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px)">02</span>
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,36px);letter-spacing:-0.015em;line-height:1.1">Land identification</span>
+          <span style="font-size:clamp(16px,1.3vw,19px);font-weight:400;color:var(--muted)">(Live prototype)</span>
+        </div>
+        <p style="margin:14px 0 0;font-size:clamp(17px,1.4vw,20px);line-height:1.45;max-width:520px;text-wrap:pretty">Ingests public parcel, land use, environmental, and physical suitability data, then filters and ranks parcels for tiny village viability. Validated against tiny villages that are currently up and running.</p>
+      </div>
+      <div class="how-step" data-step="2">
+        <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px)">03</span>
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,36px);letter-spacing:-0.015em;line-height:1.1">Budget and funding</span>
+          <span style="font-size:clamp(16px,1.3vw,19px);font-weight:400;color:var(--muted)">(Coming soon)</span>
+        </div>
+        <p style="margin:14px 0 0;font-size:clamp(17px,1.4vw,20px);line-height:1.45;max-width:520px;text-wrap:pretty">Costed bills of materials and project-level cost data from previous tiny village projects help a coalition produce a credible budget to raise against.</p>
+      </div>
+      <div class="how-step" data-step="3">
+        <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px)">04</span>
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,36px);letter-spacing:-0.015em;line-height:1.1">Design and configuration</span>
+          <span style="font-size:clamp(16px,1.3vw,19px);font-weight:400;color:var(--muted)">(Coming soon)</span>
+        </div>
+        <p style="margin:14px 0 0;font-size:clamp(17px,1.4vw,20px);line-height:1.45;max-width:520px;text-wrap:pretty">How many units a site supports, which layouts have worked, and which shared facilities a village requires — drawn from the Oakland and Richmond builds.</p>
+      </div>
+      <div class="how-step" data-step="4">
+        <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px)">05</span>
+          <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,36px);letter-spacing:-0.015em;line-height:1.1">Permitting and approvals</span>
+          <span style="font-size:clamp(16px,1.3vw,19px);font-weight:400;color:var(--muted)">(Coming soon)</span>
+        </div>
+        <p style="margin:14px 0 0;font-size:clamp(17px,1.4vw,20px);line-height:1.45;max-width:520px;text-wrap:pretty">Which approvals come in what order in your jurisdiction, what a shelter crisis declaration changes, and the permitting precedent from villages that got built.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="audience" style="padding:110px 6vw;background:var(--cream-warm)">
+  <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px;align-items:start">
+    <div>
+      <h2 class="section-headline">Who needs it</h2>
+      <p class="section-sub" style="text-wrap:pretty">The Catalyst is for groups that have decided to act but have no planning staff or domain knowledge to make it happen.</p>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px;margin-top:28px">
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Congregations</span></span>
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Nonprofit coalitions</span></span>
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Neighborhood associations</span></span>
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Community councils</span></span>
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Service providers</span></span>
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Small cities</span></span>
+        <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Informal groups of neighbors</span></span>
+      </div>
+      <p style="margin:28px 0 0;font-size:16px;color:var(--ink);text-wrap:pretty"><strong>Residents are inside the picture, not downstream of it.</strong> The platform must be usable by a resident leader on a coalition — not only by a professional planner.</p>
+    </div>
+    <div style="background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:36px 34px;box-shadow:0 30px 50px rgba(122,154,87,.15)">
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:500;font-size:32px;line-height:1.1;letter-spacing:-0.02em;margin:0 0 12px">Where the Catalyst stops</h3>
+      <p style="font-family:'Outfit',sans-serif;font-size:22px;line-height:1.3;letter-spacing:-0.01em;margin:0 0 24px;text-wrap:pretty">It helps a community get to a plan. <em style="color:var(--teal)">The village belongs to the community that builds it.</em></p>
+      <div style="display:grid;gap:12px;font-size:16px">
+        <div style="display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--hairline)"><span style="color:var(--teal);font-weight:700">—</span><span>Does not acquire land or run due diligence</span></div>
+        <div style="display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--hairline)"><span style="color:var(--teal);font-weight:700">—</span><span>Does not construct, hire, or operate villages</span></div>
+        <div style="display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--hairline)"><span style="color:var(--teal);font-weight:700">—</span><span>Does not make occupancy decisions</span></div>
+        <div style="display:flex;gap:12px"><span style="color:var(--teal);font-weight:700">—</span><span>Never asserts a parcel is available or acquirable</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="padding:120px 6vw">
+  <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px;align-items:center">
+    <div style="aspect-ratio:4/3;width:100%;position:relative">
+      <img src="assets/village-photo.jpg" alt="A Tiny Village Spirit tiny home village in the Bay Area" style="width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;position:relative;z-index:1" onerror="this.style.display='none'">
+      <div class="img-ph"><span class="dot">⊹</span><span>Photo of an Oakland or Richmond village</span></div>
+    </div>
+    <div>
+      <h2 class="section-headline">Who we are</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.25;letter-spacing:-0.01em;margin:14px 0 0;color:var(--ink);text-wrap:balance">Built by <em style="color:var(--teal)">Tiny Village Spirit</em></p>
+      <p class="section-sub" style="text-wrap:pretty">A Bay Area non-profit that helps communities build tiny home villages for unhoused neighbors. We're a catalyst: we don't operate villages — we help communities build their own.</p>
+      <p style="font-size:17px;margin:18px 0 0;text-wrap:pretty">The Catalyst is our documented experience from two constituent-led builds — the Tiny House Empowerment Village in Oakland, envisioned and led by the young people who now live there, and our village in Richmond — alongside 60+ partner organizations and 3,000+ volunteers.</p>
+      <a class="inline-link" href="https://tinyvillagespirit.com" target="_blank" rel="noopener">Visit tinyvillagespirit.com →</a>
+    </div>
+  </div>
+</section>
+
+<section id="involved" style="padding:120px 6vw;background:var(--teal);color:#fff">
+  <div style="max-width:1140px;margin:0 auto">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(36px,4.6vw,60px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:820px;text-wrap:balance">Get involved</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.25;letter-spacing:-0.01em;margin:14px 0 0;color:#fff;text-wrap:balance">Help us build the <em style="color:var(--yellow)">Catalyst.</em></p>
+    <p style="font-size:19px;max-width:640px;margin:22px 0 0;color:rgba(255,255,255,.9);text-wrap:pretty">We're a small team and every stage above needs hands. If any of these sound like you, reach out.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;margin:44px 0">
+      <div style="border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.06)"><strong style="display:block;font-size:17px;margin-bottom:6px">Engineers &amp; GIS</strong><span style="color:rgba(255,255,255,.85);font-size:15px">PostGIS, ingestion pipelines, spatial scoring, front-end mapping</span></div>
+      <div style="border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.06)"><strong style="display:block;font-size:17px;margin-bottom:6px">Planners &amp; land experts</strong><span style="color:rgba(255,255,255,.85);font-size:15px">Review sites, label data, and tell us what the screen misses</span></div>
+      <div style="border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.06)"><strong style="display:block;font-size:17px;margin-bottom:6px">Coalitions ready to build</strong><span style="color:rgba(255,255,255,.85);font-size:15px">Request access and become one of our first supported communities</span></div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn btn-yellow" href="https://tinyvillagespirit.com/contact" target="_blank" rel="noopener" style="border-radius:6px">Contact us</a>
+      <a class="btn btn-ghost" href="https://tvs-village-catalyst-demo.web.app/" target="_blank" rel="noopener" style="border-radius:6px">Try the prototype</a>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:40px 6vw;border-top:1px solid var(--hairline)">
+  <div style="max-width:1140px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--muted)">
+    <span>Tiny Village Catalyst — a project of <a href="https://tinyvillagespirit.com" target="_blank" rel="noopener" style="font-weight:600">Tiny Village Spirit</a></span>
+    <span>Code released under CC BY-NC 4.0</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ---- Hero map (ported from the DCLogic componentDidMount) ---- */
+  function initMap() {
+    var el = document.getElementById('hero-map');
+    if (!window.maplibregl || !el) return setTimeout(initMap, 100);
+    var map = new maplibregl.Map({
+      container: el, style: 'https://tiles.openfreemap.org/styles/positron',
+      center: [-122.2, 37.76], zoom: 11.2, interactive: false, attributionControl: false
+    });
+    map.on('style.load', function () {
+      var C = { land: '#f2f1ec', green: '#dde3c8', wood: '#d3dbb8', water: '#cfe2ec', road: '#ffffff', building: '#e7e5df' };
+      map.getStyle().layers.forEach(function (l) {
+        var id = l.id;
+        try {
+          if (l.type === 'background') map.setPaintProperty(id, 'background-color', C.land);
+          else if (l.type === 'fill' && /water|ocean|lake/.test(id)) map.setPaintProperty(id, 'fill-color', C.water);
+          else if (l.type === 'line' && /waterway|river/.test(id)) map.setPaintProperty(id, 'line-color', C.water);
+          else if (l.type === 'fill' && /wood|forest/.test(id)) map.setPaintProperty(id, 'fill-color', C.wood);
+          else if (l.type === 'fill' && /park|grass|landcover|cemetery|pitch|golf/.test(id)) map.setPaintProperty(id, 'fill-color', C.green);
+          else if (l.type === 'fill' && /building/.test(id)) map.setPaintProperty(id, 'fill-color', C.building);
+        } catch (e) {}
+      });
+    });
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) map.on('load', function () {
+      var c0 = [-122.2, 37.76], t0 = performance.now();
+      function tick(t) {
+        var a = ((t - t0) / 1000) * (2 * Math.PI / 180);
+        map.jumpTo({ center: [c0[0] + 0.07 * Math.cos(a), c0[1] + 0.035 * Math.sin(a)] });
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  initMap();
+
+  /* ---- "The How" scroll-pinned stepper (ported from the DCLogic component) ---- */
+  var sec = document.getElementById('how'),
+      pin = document.getElementById('howPin'),
+      win = document.getElementById('howWin'),
+      list = document.getElementById('howList');
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('.how-img'));
+  var details = Array.prototype.slice.call(document.querySelectorAll('.how-detail'));
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.how-step'));
+  var active = -1;
+
+  function setActive(i) {
+    if (i === active) return;
+    active = i;
+    imgs.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
+    details.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
+    steps.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
+  }
+
+  function goStep(i) {
+    var el = steps[i];
+    if (!el || !sec || !win) return;
+    var maxT = Math.max(0, list.scrollHeight - win.clientHeight);
+    var t = Math.min(maxT, Math.max(0, el.offsetTop - win.clientHeight * 0.35 + 40));
+    var hdr = (document.querySelector('header') || {}).offsetHeight || 88;
+    var secTop = sec.getBoundingClientRect().top + window.scrollY - hdr;
+    window.scrollTo({ top: secTop + t, behavior: 'smooth' });
+  }
+  steps.forEach(function (el, i) { el.addEventListener('click', function () { goStep(i); }); });
+
+  var ticking = 0;
+  function onScroll() {
+    if (ticking) return;
+    ticking = requestAnimationFrame(function () {
+      ticking = 0;
+      if (!sec || !win || !list) return;
+      // On narrow screens the section is a normal flow block (see CSS); skip the pin math.
+      if (window.matchMedia('(max-width:760px)').matches) { sec.style.height = ''; list.style.transform = ''; return; }
+      var maxT = Math.max(0, list.scrollHeight - win.clientHeight);
+      var hdr = (document.querySelector('header') || {}).offsetHeight || 88;
+      if (pin && pin.style.top !== hdr + 'px') { pin.style.top = hdr + 'px'; pin.style.height = 'calc(100vh - ' + hdr + 'px)'; }
+      var pinH = window.innerHeight - hdr;
+      var want = Math.round(pinH + maxT) + 'px';
+      if (sec.style.height !== want) sec.style.height = want;
+      var top = sec.getBoundingClientRect().top - hdr;
+      var t = Math.min(maxT, Math.max(0, -top));
+      list.style.transform = 'translateY(' + (-t) + 'px)';
+      var wr = win.getBoundingClientRect(); var mid = wr.top + wr.height * 0.35;
+      var best = 0, bd = Infinity;
+      steps.forEach(function (n) {
+        var r = n.getBoundingClientRect(); var d = Math.abs(r.top + 40 - mid);
+        if (d < bd) { bd = d; best = +n.getAttribute('data-step'); }
+      });
+      setActive(best);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  setActive(0);
+  setTimeout(onScroll, 300);
+})();
+</script>
+</body>
+</html>

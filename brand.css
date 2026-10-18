@@ -1,0 +1,216 @@
+/* Tiny Village Spirit — brand kit (tokens + classes).
+   Vendored from the TVS design system (_ds_bundle.css), generated from the
+   live site's public/styling/index.css. Olive-green marketing overrides for
+   this page live in index.html's <style> block, which loads after this file. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+/* ---- tokens ---- */
+:root {
+    --teal:        #04747c;
+    --teal-dark:   #035c62;
+    --teal-accent: #07b1bd;
+    --yellow:      #ffcc02;
+    --cream:       #faf7f2;
+    --cream-warm:  #f4ede0;
+    --ink:         #1b2426;
+    --muted:       #5b6769;
+    --hairline:    rgba(4, 116, 124, 0.14);
+}
+
+/* ---- base ---- */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---- primitives ---- */
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(8px);
+    margin-bottom: 32px;
+}
+
+.eyebrow-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 0 4px rgba(255,204,2,0.25);
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 4px rgba(255,204,2,0.25); }
+    50%    { box-shadow: 0 0 0 9px rgba(255,204,2,0.05); }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary::after,
+.btn-yellow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.36) 50%,
+        transparent 100%
+    );
+    animation: btn-shine 3s ease-in-out infinite;
+}
+
+@keyframes btn-shine {
+    0%   { left: -75%; }
+    40%  { left: 125%; }
+    100% { left: 125%; }
+}
+
+.btn-primary {
+    background: #04747c;
+    color: #fff;
+    border-color: #04747c;
+    font-weight: 700;
+    box-shadow: 0 6px 24px rgba(4,116,124,0.55), 0 2px 8px rgba(4,116,124,0.35);
+}
+
+.btn-primary:hover { background: #035c62; border-color: #035c62; box-shadow: 0 8px 28px rgba(4,116,124,0.65); }
+
+.btn-ghost {
+    background: #faf7f2;
+    color: #04747c;
+    border-color: #faf7f2;
+    font-weight: 700;
+}
+
+.btn-ghost:hover { background: #fff; border-color: #fff; }
+
+.btn-yellow {
+    background: var(--yellow);
+    color: #1b1b1b;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+
+.btn-yellow:hover { background: #ffd733; }
+
+.btn-outline-light {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255,255,255,0.55);
+}
+
+.btn-outline-light:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+
+.section-head {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.section-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--teal);
+    display: inline-block;
+}
+
+.section-eyebrow.center {
+    justify-content: center;
+    text-align: center;
+}
+
+.section-eyebrow.on-dark {
+    color: var(--yellow);
+}
+
+.section-eyebrow.on-dark::before {
+    background: var(--yellow);
+}
+
+.section-headline {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink);
+    text-wrap: balance;
+}
+
+.section-headline.center { text-align: center; }
+
+.section-headline em {
+    font-style: italic;
+    color: var(--teal);
+}
+
+.section-sub {
+    margin-top: 18px;
+    font-size: 18px;
+    color: var(--muted);
+}
+
+.section-sub.center { text-align: center; }
+
+.inline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--teal);
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 20px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--hairline);
+    transition: border-color .2s;
+}
+
+.inline-link:hover { border-bottom-color: var(--teal); }
