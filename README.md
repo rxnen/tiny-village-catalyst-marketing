@@ -26,10 +26,11 @@ Then open <http://localhost:8000>.
 
 ## Photos
 
-`assets/how-1.jpg` and `assets/village-photo.jpg` are in place. Four blueprint photos —
-`how-2.png`, `how-3.jpg`, `how-4.jpg`, `how-5.jpg` — are referenced by `index.html` but not
-yet committed; until they're added, those slots render a styled placeholder. Drop the files
-into `assets/` to complete the page.
+In place: `how-1.jpg`, `village-photo.jpg`, `community-photo.jpg`, and `donate-hero.jpg`
+(plus the logo and favicon). Four blueprint photos — `how-2.png`, `how-3.jpg`, `how-4.jpg`,
+`how-5.jpg` — are referenced by `index.html` but not yet committed; until they're added,
+those four slots in the "Follow our blueprint" stepper render a styled placeholder. Drop the
+files into `assets/` to complete the page.
 
 ## License
 

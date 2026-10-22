@@ -25,7 +25,8 @@ a:hover{color:var(--teal-dark)}
 
 /* buttons: olive, rectangular, no shadow, no shine (per brand brief) */
 .btn-primary{background:#7A9A57!important;border-color:#7A9A57!important;box-shadow:none!important}
-.btn-primary::after{display:none!important;content:none!important;animation:none!important}
+.btn-yellow{box-shadow:none!important}
+.btn-primary::after,.btn-yellow::after{display:none!important;content:none!important;animation:none!important}
 .btn-primary:hover{background:#5F7D43!important;border-color:#5F7D43!important}
 .btn-ghost{color:#5F7D43!important}
 
@@ -46,6 +47,7 @@ a:hover{color:var(--teal-dark)}
 .how-detail.is-on{opacity:1;pointer-events:auto}
 .how-step{cursor:pointer;min-height:42vh;padding:28px 0 0 clamp(24px,3vw,48px);border-bottom:2px dashed var(--hairline);color:var(--muted);transition:color .3s ease}
 .how-step.is-on{color:var(--ink)}
+.how-step:last-child{border-bottom:none}
 
 /* branded placeholder shown until a real photo is dropped into assets/ */
 .img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:18px;
@@ -129,47 +131,33 @@ a:hover{color:var(--teal-dark)}
   </div>
 </section>
 
-<section id="what" style="padding:96px 6vw 104px;background-color:#E8EDDD;background-image:linear-gradient(rgba(122,154,87,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(122,154,87,.11) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px">
+<section id="what" style="padding:120px 6vw 130px;background-color:#E8EDDD;background-image:linear-gradient(rgba(122,154,87,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(122,154,87,.09) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px">
   <div style="max-width:1140px;margin:0 auto">
-    <h2 class="section-headline" style="margin:0 0 56px">What it does</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:40px 0">
-      <div style="padding-right:36px">
-        <div style="display:flex;align-items:center;margin-bottom:28px">
-          <span style="width:18px;height:18px;border-radius:50%;border:3px solid var(--teal);background:#E8EDDD;flex-shrink:0;box-sizing:border-box"></span>
-          <span style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:var(--teal-dark);padding:0 12px;background:#E8EDDD">STEP_01</span>
-          <span style="flex:1;border-top:2px solid var(--teal);opacity:1"></span>
+    <h2 class="section-headline" style="margin:0 0 80px">What it does</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:64px clamp(32px,4vw,64px)">
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;margin-bottom:36px">
+          <span style="width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:18px;flex-shrink:0">1</span>
+          <span style="flex:1;border-top:2px solid var(--teal);opacity:.7;margin-left:16px"></span>
         </div>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,32px);letter-spacing:-0.015em;line-height:1.1;margin:0 0 12px;color:var(--ink)">Ask</h3>
-        <p style="margin:0;font-size:18px;line-height:1.5;color:var(--ink);text-wrap:pretty">Type a real question in plain language.</p>
-        <div style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:15px;line-height:1.55;color:var(--ink);margin-top:22px;padding:10px 0 12px;border-bottom:2px solid var(--ink);display:flex;gap:10px"><span style="color:var(--teal)">&gt;</span><span>Can we build on church-owned land in our city?<span style="display:inline-block;width:9px;height:17px;background:var(--teal);vertical-align:-3px;margin-left:4px"></span></span></div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(24px,2.2vw,30px);letter-spacing:-0.015em;line-height:1.15;margin:0 0 14px;color:var(--ink)">Ask</h3>
+        <p style="margin:0;font-size:18px;line-height:1.6;color:var(--ink);max-width:320px;text-wrap:pretty">Type a real question in plain language &gt;&nbsp; “Can we build on church-owned land in our city?”</p>
       </div>
-      <div style="padding-right:36px">
-        <div style="display:flex;align-items:center;margin-bottom:28px">
-          <span style="width:18px;height:18px;border-radius:50%;border:3px solid var(--teal);background:#E8EDDD;flex-shrink:0;box-sizing:border-box"></span>
-          <span style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:var(--teal-dark);padding:0 12px;background:#E8EDDD">STEP_02</span>
-          <span style="flex:1;border-top:2px solid var(--teal);opacity:1"></span>
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;margin-bottom:36px">
+          <span style="width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:18px;flex-shrink:0">2</span>
+          <span style="flex:1;border-top:2px solid var(--teal);opacity:.7;margin-left:16px"></span>
         </div>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,32px);letter-spacing:-0.015em;line-height:1.1;margin:0 0 12px;color:var(--ink)">Get a grounded answer</h3>
-        <p style="margin:0;font-size:18px;line-height:1.5;color:var(--ink);text-wrap:pretty">Every answer comes from a curated library of real village experience, local codes, cost data, and funder profiles, and cites its source.</p>
-        <div style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:13px;line-height:1.9;color:var(--muted);margin-top:22px;display:flex;flex-direction:column">
-          <span><span style="color:var(--teal-dark)">[1]</span> village build records</span>
-          <span><span style="color:var(--teal-dark)">[2]</span> local codes</span>
-          <span><span style="color:var(--teal-dark)">[3]</span> cost data</span>
-          <span><span style="color:var(--teal-dark)">[4]</span> funder profiles</span>
-        </div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(24px,2.2vw,30px);letter-spacing:-0.015em;line-height:1.15;margin:0 0 14px;color:var(--ink)">Get a grounded answer</h3>
+        <p style="margin:0;font-size:18px;line-height:1.6;color:var(--ink);max-width:320px;text-wrap:pretty">Every answer comes from a curated library of real village experience, local codes, cost data, and funder profiles, and cites its source so you can check it.</p>
       </div>
-      <div style="padding-right:0">
-        <div style="display:flex;align-items:center;margin-bottom:28px">
-          <span style="width:18px;height:18px;border-radius:50%;border:3px solid var(--teal);background:#E8EDDD;flex-shrink:0;box-sizing:border-box"></span>
-          <span style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.12em;color:var(--teal-dark);padding:0 12px;background:#E8EDDD">STEP_03</span>
-          <span style="flex:1;border-top:2px dashed var(--teal);opacity:.5"></span>
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;margin-bottom:36px">
+          <span style="width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:18px;flex-shrink:0">3</span>
+          <span style="flex:1;border-top:2px dashed var(--teal);opacity:.45;margin-left:16px"></span>
         </div>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,32px);letter-spacing:-0.015em;line-height:1.1;margin:0 0 12px;color:var(--ink)">Decide, with backup</h3>
-        <p style="margin:0;font-size:18px;line-height:1.5;color:var(--ink);text-wrap:pretty">For zoning, legal, and money questions, the tool flags what needs expert review and connects you with people who’ve done it.</p>
-        <div style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:13px;line-height:1.9;color:var(--ink);margin-top:22px;display:flex;flex-direction:column">
-          <span><span style="color:#b8860b">⚑</span> needs_review: zoning, legal, money</span>
-          <span><span style="color:var(--teal-dark)">→</span> route_to: someone who’s done it</span>
-        </div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(24px,2.2vw,30px);letter-spacing:-0.015em;line-height:1.15;margin:0 0 14px;color:var(--ink)">Decide, with backup</h3>
+        <p style="margin:0;font-size:18px;line-height:1.6;color:var(--ink);max-width:320px;text-wrap:pretty">For zoning, legal, and money questions, the tool flags what needs expert review and connects you with people who’ve done it.</p>
       </div>
     </div>
   </div>
@@ -242,7 +230,7 @@ a:hover{color:var(--teal-dark)}
       </div>
     </div>
     <div class="how-list-wrap" id="howWin" style="border-left:1px solid var(--hairline);overflow:hidden;height:100%;position:relative">
-    <div class="how-list" id="howList" style="padding-bottom:45vh;will-change:transform">
+    <div class="how-list" id="howList" style="will-change:transform">
       <div class="how-step is-on" data-step="0">
         <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
           <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px)">01</span>
@@ -303,33 +291,23 @@ a:hover{color:var(--teal-dark)}
         <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Small cities</span></span>
         <span style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:17px;line-height:1.4;color:var(--ink)"><span style="color:var(--teal);font-weight:700">•</span><span>Informal groups of neighbors</span></span>
       </div>
-      <p style="margin:28px 0 0;font-size:16px;color:var(--ink);text-wrap:pretty"><strong>Residents are inside the picture, not downstream of it.</strong> The platform must be usable by a resident leader on a coalition — not only by a professional planner.</p>
+      <p style="margin:28px 0 0;font-size:16px;color:var(--ink);text-wrap:pretty"><strong>Residents are part of the entire planning process.</strong>&nbsp;The platform ensures usability by a resident leader on a coalition.</p>
     </div>
-    <div style="background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:36px 34px;box-shadow:0 30px 50px rgba(122,154,87,.15)">
-      <h3 style="font-family:'Outfit',sans-serif;font-weight:500;font-size:32px;line-height:1.1;letter-spacing:-0.02em;margin:0 0 12px">Where the Catalyst stops</h3>
-      <p style="font-family:'Outfit',sans-serif;font-size:22px;line-height:1.3;letter-spacing:-0.01em;margin:0 0 24px;text-wrap:pretty">It helps a community get to a plan. <em style="color:var(--teal)">The village belongs to the community that builds it.</em></p>
-      <div style="display:grid;gap:12px;font-size:16px">
-        <div style="display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--hairline)"><span style="color:var(--teal);font-weight:700">—</span><span>Does not acquire land or run due diligence</span></div>
-        <div style="display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--hairline)"><span style="color:var(--teal);font-weight:700">—</span><span>Does not construct, hire, or operate villages</span></div>
-        <div style="display:flex;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--hairline)"><span style="color:var(--teal);font-weight:700">—</span><span>Does not make occupancy decisions</span></div>
-        <div style="display:flex;gap:12px"><span style="color:var(--teal);font-weight:700">—</span><span>Never asserts a parcel is available or acquirable</span></div>
-      </div>
-    </div>
+    <img src="assets/donate-hero.jpg" alt="Volunteer smiling in the doorway of a freshly painted tiny home" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:60% 40%;border-radius:14px">
   </div>
 </section>
 
 <section id="about" style="padding:120px 6vw">
   <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:64px;align-items:center">
-    <div style="aspect-ratio:4/3;width:100%;position:relative">
-      <img src="assets/village-photo.jpg" alt="A Tiny Village Spirit tiny home village in the Bay Area" style="width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;position:relative;z-index:1" onerror="this.style.display='none'">
-      <div class="img-ph"><span class="dot">⊹</span><span>Photo of an Oakland or Richmond village</span></div>
+    <div style="aspect-ratio:4/3;width:100%">
+      <img src="assets/community-photo.jpg" alt="Tiny Village Spirit community gathered in front of a village" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 70%;border-radius:14px">
     </div>
     <div>
       <h2 class="section-headline">Who we are</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.25;letter-spacing:-0.01em;margin:14px 0 0;color:var(--ink);text-wrap:balance">Built by <em style="color:var(--teal)">Tiny Village Spirit</em></p>
-      <p class="section-sub" style="text-wrap:pretty">A Bay Area non-profit that helps communities build tiny home villages for unhoused neighbors. We're a catalyst: we don't operate villages — we help communities build their own.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.25;letter-spacing:-0.01em;margin:14px 0 0;color:var(--ink);text-wrap:balance">Built by <em style="color:var(--teal);font-style:normal">Tiny Village Spirit</em></p>
+      <p style="font-size:17px;margin:18px 0 0;text-wrap:pretty">A Bay Area non-profit that helps communities build tiny home villages for unhoused neighbors.</p>
       <p style="font-size:17px;margin:18px 0 0;text-wrap:pretty">The Catalyst is our documented experience from two constituent-led builds — the Tiny House Empowerment Village in Oakland, envisioned and led by the young people who now live there, and our village in Richmond — alongside 60+ partner organizations and 3,000+ volunteers.</p>
-      <a class="inline-link" href="https://tinyvillagespirit.com" target="_blank" rel="noopener">Visit tinyvillagespirit.com →</a>
+      <a class="btn btn-primary" style="margin-top:24px;border-radius:6px;box-shadow:none" href="https://tinyvillagespirit.com" target="_blank" rel="noopener">Visit tinyvillagespirit.com →</a>
     </div>
   </div>
 </section>
@@ -337,15 +315,15 @@ a:hover{color:var(--teal-dark)}
 <section id="involved" style="padding:120px 6vw;background:var(--teal);color:#fff">
   <div style="max-width:1140px;margin:0 auto">
     <h2 style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(36px,4.6vw,60px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:820px;text-wrap:balance">Get involved</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.25;letter-spacing:-0.01em;margin:14px 0 0;color:#fff;text-wrap:balance">Help us build the <em style="color:var(--yellow)">Catalyst.</em></p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(22px,2.2vw,28px);line-height:1.25;letter-spacing:-0.01em;margin:14px 0 0;color:#fff;text-wrap:balance">Help us build the <em style="color:var(--yellow);font-style:normal">Catalyst.</em></p>
     <p style="font-size:19px;max-width:640px;margin:22px 0 0;color:rgba(255,255,255,.9);text-wrap:pretty">We're a small team and every stage above needs hands. If any of these sound like you, reach out.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;margin:44px 0">
-      <div style="border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.06)"><strong style="display:block;font-size:17px;margin-bottom:6px">Engineers &amp; GIS</strong><span style="color:rgba(255,255,255,.85);font-size:15px">PostGIS, ingestion pipelines, spatial scoring, front-end mapping</span></div>
-      <div style="border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.06)"><strong style="display:block;font-size:17px;margin-bottom:6px">Planners &amp; land experts</strong><span style="color:rgba(255,255,255,.85);font-size:15px">Review sites, label data, and tell us what the screen misses</span></div>
-      <div style="border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.06)"><strong style="display:block;font-size:17px;margin-bottom:6px">Coalitions ready to build</strong><span style="color:rgba(255,255,255,.85);font-size:15px">Request access and become one of our first supported communities</span></div>
+    <div style="display:grid;gap:12px;margin:36px 0 44px;max-width:760px">
+      <div style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;align-items:baseline"><span style="color:var(--yellow);font-weight:700">•</span><span><strong style="font-size:17px">Engineers &amp; GIS</strong> <span style="color:rgba(255,255,255,.85);font-size:15px">— PostGIS, ingestion pipelines, spatial scoring, front-end mapping</span></span></div>
+      <div style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;align-items:baseline"><span style="color:var(--yellow);font-weight:700">•</span><span><strong style="font-size:17px">Planners &amp; land experts</strong> <span style="color:rgba(255,255,255,.85);font-size:15px">— Review sites, label data, and tell us what the screen misses</span></span></div>
+      <div style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;align-items:baseline"><span style="color:var(--yellow);font-weight:700">•</span><span><strong style="font-size:17px">Coalitions ready to build</strong> <span style="color:rgba(255,255,255,.85);font-size:15px">— Request access and become one of our first supported communities</span></span></div>
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a class="btn btn-yellow" href="https://tinyvillagespirit.com/contact" target="_blank" rel="noopener" style="border-radius:6px">Contact us</a>
+      <a class="btn btn-yellow" href="https://tinyvillagespirit.com/contact" target="_blank" rel="noopener" style="border-radius:6px;white-space:nowrap;flex-shrink:0;overflow:visible">Contact us</a>
       <a class="btn btn-ghost" href="https://tvs-village-catalyst-demo.web.app/" target="_blank" rel="noopener" style="border-radius:6px">Try the prototype</a>
     </div>
   </div>
@@ -447,6 +425,7 @@ a:hover{color:var(--teal-dark)}
         var r = n.getBoundingClientRect(); var d = Math.abs(r.top + 40 - mid);
         if (d < bd) { bd = d; best = +n.getAttribute('data-step'); }
       });
+      if (maxT > 0 && t >= maxT - 2) best = 4;
       setActive(best);
     });
   }
