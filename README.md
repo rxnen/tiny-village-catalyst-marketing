@@ -20,8 +20,10 @@ Then open <http://localhost:8000>.
 - `index.html` — the full page: sticky nav, a recolored [MapLibre](https://maplibre.org/)
   hero map, the problem/what-it-does sections, a scroll-pinned "Follow our blueprint"
   stepper, audience, about, and a get-involved band.
+- `for-organizers.html` — the "For Organizers" page: a full-bleed hero, an auto-advancing
+  stage-by-stage coverflow carousel, a "why partner" grid, and an FAQ. Linked from the main nav.
 - `brand.css` — the Tiny Village Spirit brand kit (color tokens + component classes),
-  with the page's olive-green overrides applied in `index.html`.
+  shared by both pages, with each page's olive-green overrides applied inline.
 - `assets/` — `catalyst-logo.svg`, `favicon.svg`, and photography.
 
 ## Photos

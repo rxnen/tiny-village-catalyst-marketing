@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Organizers — Tiny Village Catalyst</title>
+<meta name="description" content="What Tiny Village Catalyst gives community organizers: stage-by-stage answers on organizing, siting, permitting, budgeting, funding, and hand-off — backed by data and two real village builds.">
+<meta property="og:title" content="For Organizers — Tiny Village Catalyst">
+<meta property="og:description" content="Answers backed by data and experience that usually take years to uncover — for congregations, schools, and neighborhood coalitions ready to build.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg">
+
+<link rel="stylesheet" href="brand.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+:root{--teal:#7A9A57;--teal-dark:#5F7D43;--teal-accent:#93B26F;--hairline:rgba(122,154,87,.22)}
+body{background:#F4F1EA;--teal:#7A9A57;--teal-dark:#5F7D43;--teal-accent:#93B26F;--hairline:rgba(122,154,87,.22)}
+.section-headline,h1,h2,h3,h4{font-family:'Outfit',sans-serif!important}
+a{color:var(--teal)}
+a:hover{color:var(--teal-dark)}
+
+/* buttons: olive, rectangular, no shadow, no shine (per brand brief) */
+.btn-primary{background:#7A9A57!important;border-color:#7A9A57!important;box-shadow:none!important}
+.btn-primary::after{display:none!important;content:none!important;animation:none!important}
+.btn-primary:hover{background:#5F7D43!important;border-color:#5F7D43!important}
+
+/* hover states (ported from the design canvas style-hover attributes) */
+.nav-contribute{transition:background .2s,color .2s}
+.nav-contribute:hover{background:var(--teal)!important;color:#fff!important}
+.hero-demo-btn{transition:background .2s,color .2s}
+.hero-demo-btn:hover{background:#F4F1EA!important;color:#4C6635!important}
+.hero-see-btn{transition:background .2s,color .2s}
+.hero-see-btn:hover{background:rgba(255,255,255,.14)!important;color:#fff!important}
+
+/* stage-by-stage coverflow carousel (ported from the DCLogic component) */
+.stage-track{position:relative;width:100%;height:280px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
+.stage-card{position:absolute;left:50%;width:min(460px,78%);top:34%;transform-origin:center center;transition:transform .8s cubic-bezier(.65,0,.35,1),opacity .8s}
+.stage-q{font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(24px,2.6vw,32px);line-height:1.18;letter-spacing:-0.02em;margin:0 auto;transition:color .8s;text-wrap:balance;max-width:720px}
+.stage-a{position:absolute;left:0;right:0;top:100%;margin:14px auto 0;font-size:18px;line-height:1.5;color:var(--ink);max-width:560px;transition:opacity .5s;text-wrap:pretty}
+
+@media (max-width:760px){
+  header nav{gap:16px!important}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header style="font-family:'Outfit',sans-serif;padding:0 6vw;position:sticky;top:0;z-index:20;background:#fff">
+  <div style="max-width:1240px;margin:0 auto;padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <a href="index.html" style="text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:12px">
+      <span style="width:44px;height:44px;border-radius:50%;background:var(--teal);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+        <svg width="30" height="30" viewBox="160 160 396 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tiny Village Catalyst logo"><path d="M508.749 317.399C516.777 287.314 508.991 253.884 485.389 230.282C461.788 206.681 428.36 198.895 398.273 206.923C376.231 184.928 343.39 174.956 311.148 183.596C278.906 192.234 255.45 217.292 247.36 247.361C217.291 255.451 192.233 278.91 183.595 311.149C174.957 343.391 184.927 376.232 206.924 398.274C198.896 428.359 206.683 461.789 230.284 485.391C253.885 508.992 287.313 516.779 317.401 508.75C339.442 530.745 372.286 540.717 404.525 532.079C436.767 523.441 460.223 498.384 468.313 468.315C498.383 460.224 523.44 436.766 532.078 404.526C540.716 372.285 530.747 339.443 508.749 317.402V317.399ZM470.899 244.776C486.892 260.77 493.488 282.601 490.687 303.412L415.577 260.046C412.411 258.218 408.509 258.218 405.345 260.046L317.401 310.82V277.526C317.401 275.191 318.652 273.005 320.676 271.837L387.644 233.174C414.178 218.353 448.346 222.223 470.901 244.776H470.899ZM357.837 311.144L398.275 334.491V381.185L357.837 404.532L317.398 381.185V334.491L357.837 311.144ZM264.776 269.693C265.207 239.305 285.644 211.649 316.453 203.393C338.3 197.54 360.505 202.744 377.127 215.573L302.014 258.937C298.848 260.764 296.898 264.144 296.898 267.798V369.346L268.065 352.699C266.043 351.531 264.776 349.353 264.776 347.017V269.691V269.693ZM203.391 316.454C209.244 294.608 224.854 277.978 244.276 269.999V356.73C244.276 360.384 246.226 363.763 249.392 365.591L337.337 416.365L308.503 433.013C306.481 434.181 303.961 434.188 301.939 433.02L234.971 394.357C208.868 378.789 195.138 347.261 203.391 316.454ZM244.775 470.9C228.781 454.906 222.186 433.075 224.986 412.264L300.096 455.63C303.263 457.457 307.164 457.457 310.328 455.63L398.273 404.856V438.149C398.273 440.485 397.022 442.671 394.997 443.839L328.029 482.502C301.495 497.322 267.327 493.452 244.772 470.9H244.775ZM450.897 445.982C450.466 476.371 430.029 504.027 399.22 512.283C377.373 518.136 355.168 512.932 338.547 500.102L413.659 456.738C416.826 454.911 418.775 451.532 418.775 447.877V346.329L447.609 362.977C449.631 364.145 450.897 366.323 450.897 368.659V445.985V445.982ZM512.282 399.221C506.429 421.068 490.819 437.697 471.397 445.676V358.946C471.397 355.292 469.448 351.912 466.281 350.085L378.336 299.311L407.17 282.663C409.192 281.495 411.712 281.487 413.734 282.655L480.702 321.318C506.805 336.887 520.536 368.415 512.282 399.221Z" fill="#fff"/></svg>
+      </span>
+      <span style="font-family:'Source Sans 3',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1">Tiny Village Catalyst</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;font-size:15px;font-weight:600">
+      <a href="index.html#about" style="text-decoration:none;color:var(--ink);font-weight:400;font-size:18px;font-family:'Source Sans 3',sans-serif">About</a>
+      <a href="for-organizers.html" style="text-decoration:none;color:var(--teal-dark);font-weight:600;font-size:18px;font-family:'Source Sans 3',sans-serif">For Organizers</a>
+      <a href="index.html#goals" style="text-decoration:none;color:var(--ink);font-weight:400;font-size:18px;font-family:'Source Sans 3',sans-serif">For Funders</a>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="nav-contribute" href="index.html#involved" style="text-decoration:none;color:var(--teal);border:1.5px solid var(--teal);border-radius:6px;padding:9px 18px;font-size:14px;font-weight:600;font-family:'Source Sans 3',sans-serif">Contribute</a>
+        <a class="btn btn-primary" href="https://tinyvillagespirit.com/contact" target="_blank" rel="noopener" style="border-radius:6px;padding:10px 20px;font-size:14px;box-shadow:none;font-family:'Source Sans 3',sans-serif">Join the Pilot</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section style="position:relative;overflow:hidden;padding:clamp(90px,12vw,150px) 6vw clamp(80px,10vw,120px);color:#fff;background:url('assets/painted-house-2.jpg') center 78%/cover no-repeat">
+  <div style="position:absolute;inset:0;background:rgba(80,106,52,.74);pointer-events:none"></div>
+  <div style="max-width:1000px;margin:0 auto;text-align:center;position:relative">
+    <h1 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(40px,6vw,84px);line-height:1.05;letter-spacing:-0.03em;margin:0;color:#fff;text-wrap:balance">From Vision to Village</h1>
+    <p style="font-size:clamp(19px,1.7vw,23px);line-height:1.5;max-width:780px;margin:28px auto 0;color:#fff;text-wrap:pretty">Whether you're a congregation with an empty lot, a school with a fallow parcel, or a neighborhood coalition, Tiny Village Catalyst provides answers backed by data and experience that usually take years to uncover.</p>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:40px">
+      <a class="hero-demo-btn" href="https://tvs-village-catalyst-demo.web.app/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#fff;color:#5F7D43;text-decoration:none;font-weight:600;font-size:17px;padding:15px 28px;border-radius:6px">Try the demo →</a>
+      <a class="hero-see-btn" href="#stages" style="display:inline-flex;align-items:center;text-decoration:none;color:#fff;border:1.5px solid #fff;border-radius:6px;padding:14px 26px;font-size:17px;font-weight:600">See what's inside</a>
+    </div>
+  </div>
+</section>
+
+<section id="stages" style="background:#fff;padding:clamp(80px,9vw,120px) 6vw">
+  <div style="max-width:1140px;margin:0 auto">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(24px,3vw,40px)">
+      <div style="max-width:720px">
+        <h2 class="section-headline center" style="margin:0 auto;text-wrap:balance">Where the Catalyst helps, stage by stage</h2>
+        <p style="font-size:18px;line-height:1.55;color:var(--muted);margin:18px auto 0;max-width:560px;text-wrap:pretty">The questions every organizer gets stuck on, and what the Catalyst gives you to answer them.</p>
+      </div>
+      <div class="stage-track" id="stageTrack">
+        <div class="stage-card" data-idx="0" style="transform:translate(calc(-50% + 0px), -50%) scale(1);opacity:1;cursor:default">
+          <h3 class="stage-q" style="color:var(--teal-dark)">Who needs to be at the table, and how do residents lead?</h3>
+          <p class="stage-a" style="opacity:1">Resident-leadership models and first-meeting guides from two villages.</p>
+        </div>
+        <div class="stage-card" data-idx="1" style="transform:translate(calc(-50% + 420px), -50%) scale(.7);opacity:.5;cursor:pointer">
+          <h3 class="stage-q" style="color:var(--ink)">Where could a village even go?</h3>
+          <p class="stage-a" style="opacity:0">The Open Parcel site finder, plus the "fallow land" approach for parcels in transition.</p>
+        </div>
+        <div class="stage-card" data-idx="2" style="transform:translate(calc(-50% + 840px), -50%) scale(.62);opacity:.2;cursor:pointer">
+          <h3 class="stage-q" style="color:var(--ink)">What does our city's code allow?</h3>
+          <p class="stage-a" style="opacity:0">Local zoning precedents with citations, and review flags before you act.</p>
+        </div>
+        <div class="stage-card" data-idx="3" style="transform:translate(calc(-50% + 1260px), -50%) scale(.62);opacity:0;cursor:pointer">
+          <h3 class="stage-q" style="color:var(--ink)">What will this really cost?</h3>
+          <p class="stage-a" style="opacity:0">Real line-item costs from Oakland and Richmond, in today's dollars.</p>
+        </div>
+        <div class="stage-card" data-idx="4" style="transform:translate(calc(-50% + -840px), -50%) scale(.62);opacity:.2;cursor:pointer">
+          <h3 class="stage-q" style="color:var(--ink)">Who will say yes?</h3>
+          <p class="stage-a" style="opacity:0">Funder profiles by county and stage, plus draft letters.</p>
+        </div>
+        <div class="stage-card" data-idx="5" style="transform:translate(calc(-50% + -420px), -50%) scale(.7);opacity:.5;cursor:pointer">
+          <h3 class="stage-q" style="color:var(--ink)">How do we build it, and who runs it?</h3>
+          <p class="stage-a" style="opacity:0">The volunteer build-day model and the operating-partner hand-off playbook.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding-top:36px;border-top:2px solid var(--teal);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,2.2vw,30px);letter-spacing:-0.02em;line-height:1.2;margin:0;max-width:720px;text-wrap:balance">Start on siting today: the Open Parcel site finder is live.</p>
+      <a class="btn btn-primary" href="https://tvs-village-catalyst-demo.web.app/" target="_blank" rel="noopener" style="border-radius:6px;padding:15px 28px;font-size:17px">Try the demo ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="padding:clamp(80px,9vw,120px) 6vw">
+  <div style="max-width:1140px;margin:0 auto">
+    <h2 class="section-headline" style="margin:0 0 clamp(40px,5vw,56px)">Why partner with us</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:clamp(28px,3vw,40px)">
+      <div style="border-top:3px solid var(--teal);padding-top:26px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,1.9vw,26px);line-height:1.2;letter-spacing:-0.015em;margin:0;text-wrap:balance">Save time</h3>
+        <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);text-wrap:pretty">Our goal is to cut the path from first meeting to open doors by about a third.</p>
+      </div>
+      <div style="border-top:3px solid var(--teal);padding-top:26px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,1.9vw,26px);line-height:1.2;letter-spacing:-0.015em;margin:0;text-wrap:balance">Avoid costly mistakes</h3>
+        <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);text-wrap:pretty">Learn from what went wrong and right in two villages before you spend money on a site that won't work.</p>
+      </div>
+      <div style="border-top:3px solid var(--teal);padding-top:26px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,1.9vw,26px);line-height:1.2;letter-spacing:-0.015em;margin:0;text-wrap:balance">Keep it yours</h3>
+        <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);text-wrap:pretty">The tool informs and drafts. Your community makes the decisions, and owns and runs the village.</p>
+      </div>
+      <div style="border-top:3px solid var(--teal);padding-top:26px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(22px,1.9vw,26px);line-height:1.2;letter-spacing:-0.015em;margin:0;text-wrap:balance">Help the next community</h3>
+        <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);text-wrap:pretty">What you learn in your city makes the tool smarter for everyone after you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#fff;padding:clamp(80px,9vw,120px) 6vw">
+  <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(32px,5vw,80px);align-items:start">
+    <h2 class="section-headline" style="margin:0;max-width:420px">Questions organizers ask</h2>
+    <div style="border-bottom:2px dashed var(--hairline)">
+        <div style="border-top:2px dashed var(--hairline);padding:28px 0;display:flex;flex-direction:column;gap:10px">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.25;letter-spacing:-0.015em;margin:0">Is it free?</h3>
+          <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);max-width:640px;text-wrap:pretty">Yes. The tools are free and openly licensed for community and nonprofit use.</p>
+        </div>
+        <div style="border-top:2px dashed var(--hairline);padding:28px 0;display:flex;flex-direction:column;gap:10px">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.25;letter-spacing:-0.015em;margin:0">Do we need technical skills?</h3>
+          <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);max-width:640px;text-wrap:pretty">No. If you can send a text message, you can use it.</p>
+        </div>
+        <div style="border-top:2px dashed var(--hairline);padding:28px 0;display:flex;flex-direction:column;gap:10px">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.25;letter-spacing:-0.015em;margin:0">Is it only for the Bay Area?</h3>
+          <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);max-width:640px;text-wrap:pretty">Our experience is in Alameda and Contra Costa counties today, with our live prototype supporting only four Bay Area cities. We expect our platform to grow as communities in new places join.</p>
+        </div>
+        <div style="border-top:2px dashed var(--hairline);padding:28px 0;display:flex;flex-direction:column;gap:10px">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.25;letter-spacing:-0.015em;margin:0">Can it replace a lawyer or architect?</h3>
+          <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);max-width:640px;text-wrap:pretty">No. It helps you get to the right questions faster and tells you when you need a professional.</p>
+        </div>
+        <div style="border-top:2px dashed var(--hairline);padding:28px 0;display:flex;flex-direction:column;gap:10px">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.25;letter-spacing:-0.015em;margin:0">What data do you collect?</h3>
+          <p style="font-size:17px;line-height:1.55;margin:0;color:var(--ink);max-width:640px;text-wrap:pretty">Only community- and project-level information. We never collect data about individual residents.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  /* ---- "Stage by stage" coverflow carousel (ported from the DCLogic component) ---- */
+  var track = document.getElementById('stageTrack');
+  if (!track) return;
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.stage-card'));
+  var N = cards.length;
+  var q = 0, qPrev = 0, timer = null;
+
+  function rel(idx, a) { var d = ((idx - a) % N + N) % N; return d > 3 ? d - N : d; }
+
+  function update() {
+    cards.forEach(function (card, idx) {
+      var d = rel(idx, q), pd = rel(idx, qPrev);
+      var X = d * 420;
+      var sc = d === 0 ? 1 : Math.abs(d) === 1 ? 0.7 : 0.62;
+      var op = d === 0 ? 1 : Math.abs(d) === 1 ? 0.5 : Math.abs(d) === 2 ? 0.2 : 0;
+      card.style.transition = Math.abs(d - pd) > 1 ? 'none' : 'transform .8s cubic-bezier(.65,0,.35,1), opacity .8s';
+      card.style.transform = 'translate(calc(-50% + ' + X + 'px), -50%) scale(' + sc + ')';
+      card.style.opacity = op;
+      card.style.cursor = d === 0 ? 'default' : 'pointer';
+      card.querySelector('.stage-q').style.color = d === 0 ? 'var(--teal-dark)' : 'var(--ink)';
+      card.querySelector('.stage-a').style.opacity = d === 0 ? 1 : 0;
+    });
+  }
+
+  function go(n) { qPrev = q; q = ((n % N) + N) % N; update(); }
+  function start() { clearInterval(timer); timer = setInterval(function () { go(q + 1); }, 3800); }
+  function stop() { clearInterval(timer); }
+
+  cards.forEach(function (card, idx) { card.addEventListener('click', function () { go(idx); start(); }); });
+  track.addEventListener('mouseenter', stop);
+  track.addEventListener('mouseleave', start);
+
+  update();
+  start();
+})();
+</script>
+</body>
+</html>
